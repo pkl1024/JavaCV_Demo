@@ -13,23 +13,23 @@ import org.opencv.objdetect.CascadeClassifier;
 //
 class DetectFaceDemo {
     public void run() {
-        System.out.println("\nRunning DetectFaceDemo");
-        // Create a face detector from the cascade file in the resources
-        // directory.
+        System.out.println("\n正在运行人脸检测Demo");
+        // 从参考资料中的级联文件创建人脸检测器
+        // 文件目录.
         CascadeClassifier faceDetector = new CascadeClassifier("D:\\JAVAweb\\JavaCV_Demo\\src\\main\\resources\\lbpcascade_frontalface.xml");
-        Mat image = Imgcodecs.imread("D:\\JAVAweb\\JavaCV_Demo\\src\\main\\resources\\HuGe.png");
-        // Detect faces in the image.
-        // MatOfRect is a special container class for Rect.
+        Mat image = Imgcodecs.imread("D:\\JAVAweb\\JavaCV_Demo\\src\\main\\resources\\1.jpg");
+        // 在图像中检测人脸。
+        // MatOfRect是Rect的一个特殊容器类。
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(image, faceDetections);
-        System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
-        // Draw a bounding box around each face.
+        System.out.println(String.format("检测到 %s 张脸", faceDetections.toArray().length));
+        // 在每个是别到的脸周围画一个边界框。
         for (Rect rect : faceDetections.toArray()) {
-            Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0));
+            Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,255,0));
         }
-        // Save the visualized detection.
+        // 保存可视化检测。
         String filename = "faceDetection.png";
-        System.out.println(String.format("Writing %s", filename));
+        System.out.println(String.format("检测结果图片存为： %s", filename));
         Imgcodecs.imwrite(filename, image);
     }
 }
